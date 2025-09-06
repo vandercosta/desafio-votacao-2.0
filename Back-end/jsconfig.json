@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "checkJs": true
+    "checkJs": false
   },
   "include": ["./**/*.js"],
   "exclude": ["node_modules", "mongo-init", "dist"]
