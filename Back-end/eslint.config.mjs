@@ -15,6 +15,15 @@ export default defineConfig([
   },
   { files: ['**/*.js'], languageOptions: { sourceType: 'commonjs' } },
   {
+    files: ['tests/**/*.js'], // só para os testes
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.jest, // habilita describe, it, beforeAll, etc
+      },
+    },
+  },
+  {
     ignores: ['mongo-init/**'],
   },
 ]);

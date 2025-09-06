@@ -17,9 +17,6 @@ app.use(express.json());
 // inicializar passport
 app.use(passport.initialize());
 
-// Conexão MongoDB
-require('./config/db');
-
 // Swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
@@ -27,7 +24,13 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/auth', authRoutes);
 app.use('/api/usuarios', usuarioRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
-  console.log(`Swagger docs em http://localhost:${PORT}/api-docs`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  // Conexão MongoDB
+  require('./config/db');
+  app.listen(PORT, () => {
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
+    console.log(`Swagger docs em http://localhost:${PORT}/api-docs`);
+  });
+}
+
+module.exports = app;

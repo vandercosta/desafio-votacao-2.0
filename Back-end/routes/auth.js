@@ -90,7 +90,7 @@ router.post('/login', async (req, res) => {
 
     res.json({ token: 'Bearer ' + token });
   } catch (err) {
-    res.status(500).json({ erro: 'Erro no login' });
+    res.status(500).json({ erro: `Erro no login: ${err}` });
   }
 });
 
