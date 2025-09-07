@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Usuario = require('../models/Usuario');
+const authMiddleware = require('../middlewares/authMiddleware');
+const requireAdmin = require('../middlewares/requireAdmin');
 
 /**
  * @swagger
@@ -11,7 +13,7 @@ const Usuario = require('../models/Usuario');
  *       200:
  *         description: Lista de usuários
  */
-router.get('/', async (req, res) => {
+router.get('/', authMiddleware, requireAdmin, async (req, res) => {
   const usuarios = await Usuario.find();
   res.json(usuarios);
 });

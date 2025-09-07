@@ -10,3 +10,10 @@ db.usuarios.insertMany([
     isAdmin: true,
   },
 ]);
+
+db.createCollection('categorias');
+db.categorias.insertMany([
+  { nome: 'Educação' },
+  { nome: 'Saúde' },
+  { nome: 'Segurança' },
+]);
