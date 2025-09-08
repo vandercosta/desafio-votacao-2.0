@@ -49,7 +49,7 @@ export class CadastroPautaComponent implements OnInit {
       },
       error: (err) => {
         console.error('Erro ao criar pauta:', err);
-        alert(err.error?.error || 'Erro ao votar');
+        alert(err.error?.error || 'Erro ao criar pauta');
       },
     });
   }
