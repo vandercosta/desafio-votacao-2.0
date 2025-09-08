@@ -31,17 +31,24 @@ export class PautaComponent implements OnInit {
   votar(voto: 'SIM' | 'NÃO'): void {
     this.pautasService.postVoto(this.pautaId, { voto }).subscribe({
       next: () => {
-        const p = this.pauta();
-        if (p) {
-          if (voto === 'SIM') p.votosSim++;
-          else p.votosNao++;
-          p.jaVotou = true;
-          this.pauta.set({ ...p });
+        const pauta = this.pauta();
+        if (pauta) {
+          if (voto === 'SIM') pauta.votosSim++;
+          else pauta.votosNao++;
+          pauta.jaVotou = true;
+          this.pauta.set({ ...pauta });
         }
       },
       error: (err) => {
         alert(err.error?.error || 'Erro ao votar');
       },
     });
+  }
+
+  get podeVotar(): boolean {
+    const pauta = this.pauta();
+    if (!pauta) return false;
+    const expirou = new Date(pauta.dataExpiracao) < new Date();
+    return !pauta.jaVotou && !expirou;
   }
 }

@@ -5,7 +5,7 @@
   </div>
 
   <div>
-    <button (click)="votar('SIM')" [disabled]="pauta()?.jaVotou">Vote SIM</button>
-    <button (click)="votar('NÃO')" [disabled]="pauta()?.jaVotou">Vote NÃO</button>
+    <button (click)="votar('SIM')" [disabled]="!podeVotar">Vote SIM</button>
+    <button (click)="votar('NÃO')" [disabled]="!podeVotar">Vote NÃO</button>
   </div>
 }

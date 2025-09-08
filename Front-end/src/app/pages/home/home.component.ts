@@ -5,6 +5,7 @@ import { IPauta } from '../../models/pauta';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule],
 })
 export class HomeComponent implements OnInit {
+  private authService = inject(AuthService);
   private pautasService = inject(PautasService);
   private router = inject(Router);
 
@@ -23,8 +25,11 @@ export class HomeComponent implements OnInit {
 
   filtroSelecionado = signal<string>('todos');
 
+  isAdmin = signal(false);
+
   ngOnInit(): void {
     console.log('Pautas em votação');
+    this.isAdmin.set(this.authService.getAdmin() === 'true');
   }
 
   abrirDetalhe(pauta: IPauta): void {
@@ -33,6 +38,10 @@ export class HomeComponent implements OnInit {
 
   cadastrarPauta(): void {
     this.router.navigate(['/cadastrar-pauta']);
+  }
+
+  listarUsuarios(): void {
+    this.router.navigate(['/lista-usuario']);
   }
 
   filtrar(): void {

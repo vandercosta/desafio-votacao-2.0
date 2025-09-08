@@ -1,5 +1,9 @@
 <h1>{{ mensagem }}</h1>
-<button (click)="cadastrarPauta()">Criar Pauta</button>
+
+@if (isAdmin()) {
+  <button (click)="cadastrarPauta()">Criar Pauta</button>
+  <button (click)="listarUsuarios()">Lista de usuário</button>
+}
 
 <label for="categoria">Filtrar por categoria:</label>
 <select id="categoria" [(ngModel)]="filtroSelecionado" (change)="filtrar()">
