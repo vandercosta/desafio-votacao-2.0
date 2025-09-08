@@ -77,7 +77,12 @@ router.get('/', authMiddleware, async (req, res) => {
     if (!cpf)
       return res.status(400).json({ error: 'CPF do usuário não encontrado' });
 
-    const pautas = await Pauta.find().populate('categoria');
+    const { categoria } = req.query;
+
+    // Se categoria foi passada, filtra. Senão, pega todas.
+    const filtro = categoria ? { categoria } : {};
+
+    const pautas = await Pauta.find(filtro).populate('categoria');
 
     const pautasFormatadas = pautas.map((p) => ({
       _id: p._id,
