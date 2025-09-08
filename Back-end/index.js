@@ -9,6 +9,7 @@ const swaggerSpec = require('./swagger/swagger');
 const usuarioRoutes = require('./routes/usuarios');
 const authRoutes = require('./routes/auth');
 const pautaRoutes = require('./routes/pautas');
+const categoriasRoutes = require('./routes/categorias');
 
 const app = express();
 const PORT = 3000;
@@ -25,6 +26,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/auth', authRoutes);
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/pautas', pautaRoutes);
+app.use('/api/categorias', categoriasRoutes);
 
 if (process.env.NODE_ENV !== 'test') {
   // Conexão MongoDB
