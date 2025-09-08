@@ -1,0 +1,13 @@
+<button (click)="cadastrarUsuario()">cadastrar novo usuário</button>
+<h2>
+  @if (mensagem()) {
+    {{ mensagem() }}
+  }
+</h2>
+
+@for (usuario of listaUsuarios(); track $index) {
+  <p>
+    {{ usuario.username }} - {{ usuario.nome }} - {{ usuario.cpf }} - {{ usuario.email }} -
+    {{ usuario.isAdmin ? 'Administrador' : 'Usuário comum' }}
+  </p>
+}
