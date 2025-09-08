@@ -1,9 +1,17 @@
 <div class="login-container">
   <h2>Login</h2>
   <form [formGroup]="form" (ngSubmit)="login()">
-    <input formControlName="username" placeholder="Usuário" />
-    <input type="password" formControlName="password" placeholder="Senha" />
-    <button type="submit">Entrar</button>
+    <mat-form-field>
+      <mat-label for="username">Usuário:</mat-label>
+      <input id="username" matInput formControlName="username" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label for="password">Senha:</mat-label>
+      <input type="password" id="password" matInput formControlName="password" />
+    </mat-form-field>
+
+    <button matButton="filled" type="submit">Entrar</button>
   </form>
 
   @if (errorMessage()) {
