@@ -7,12 +7,22 @@ import { ICategoria } from '../../models/categoria';
 import { Observable } from 'rxjs';
 import { Router, RouterModule } from '@angular/router';
 import { IPauta } from '../../models/pauta';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-cadastro-pauta',
   templateUrl: './cadastro-pauta.component.html',
   styleUrls: ['./cadastro-pauta.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
 })
 export class CadastroPautaComponent implements OnInit {
   private pautasService = inject(PautasService);

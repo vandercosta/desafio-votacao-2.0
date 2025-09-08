@@ -1,17 +1,18 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 import { Router, RouterModule } from '@angular/router';
 import { UsuariosService } from '../../core/services/usuarios.service';
 import { IUsuario } from '../../models/usuario';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-lista-usuario',
   templateUrl: './lista-usuario.component.html',
   styleUrls: ['./lista-usuario.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, MatButtonModule],
 })
 export class ListaUsuarioComponent implements OnInit {
   private usuariosService = inject(UsuariosService);
@@ -30,7 +31,7 @@ export class ListaUsuarioComponent implements OnInit {
     this.usuariosService.getUsuarios().subscribe({
       next: (res: IUsuario[]) => {
         this.listaUsuarios.set(res);
-        this.mensagem.set('Usuários listados com sucesso!');
+        this.mensagem.set('Usuários');
       },
       error: (err) => {
         this.mensagem.set(err.error?.error || 'Erro ao listar usuários');

@@ -5,12 +5,14 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IPauta } from '../../models/pauta';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-pauta',
   templateUrl: './pauta.component.html',
   styleUrls: ['./pauta.component.scss'],
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule],
 })
 export class PautaComponent implements OnInit {
   private pautasService = inject(PautasService);
@@ -20,11 +22,11 @@ export class PautaComponent implements OnInit {
 
   private pautaId = this.route.snapshot.paramMap.get('id')!;
 
-  pauta = signal<IPauta | null>(null); // WritableSignal
+  pauta = signal<IPauta | null>(null);
 
   ngOnInit(): void {
     this.pautasService.getPautaById(this.pautaId).subscribe((p) => {
-      this.pauta.set(p); // agora funciona
+      this.pauta.set(p);
     });
   }
 
@@ -50,5 +52,16 @@ export class PautaComponent implements OnInit {
     if (!pauta) return false;
     const expirou = new Date(pauta.dataExpiracao) < new Date();
     return !pauta.jaVotou && !expirou;
+  }
+
+  get statusPauta(): string | null {
+    const pauta = this.pauta();
+    if (!pauta) return null;
+
+    const expirou = new Date(pauta.dataExpiracao) < new Date();
+    if (!expirou) return null; // só mostra depois que expira
+
+    // regra: maioria dos votos foi SIM
+    return pauta.votosSim > pauta.votosNao ? 'Aprovada' : 'Reprovada';
   }
 }

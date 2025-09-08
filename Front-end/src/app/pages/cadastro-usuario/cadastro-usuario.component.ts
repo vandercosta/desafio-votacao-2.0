@@ -3,28 +3,34 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { UsuariosService } from '../../core/services/usuarios.service';
-import { IUsuario } from '../../models/usuario';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-cadastro-usuario',
   templateUrl: './cadastro-usuario.component.html',
   styleUrls: ['./cadastro-usuario.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
 })
 export class CadastroUsuarioComponent implements OnInit {
   private usuariosService = inject(UsuariosService);
   private fb = inject(FormBuilder);
-  // private router = inject(Router);
 
   usuarioForm!: FormGroup;
   mensagem: string | null = null;
 
-  // usuarioCadastrado: IUsuario | null = null;
-
   ngOnInit(): void {
-    console.log('cadastro-usuario.component');
     this.usuarioForm = this.fb.group({
       username: ['', [Validators.required]],
       nome: ['', [Validators.required]],

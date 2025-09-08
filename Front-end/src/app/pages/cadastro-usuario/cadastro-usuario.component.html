@@ -1,37 +1,40 @@
-@if (mensagem) {
-  <p>{{ mensagem }}</p>
-}
+<div class="cadastro-usuario__container">
+  <h2>Cadastro de Usuário</h2>
+  <form [formGroup]="usuarioForm" (ngSubmit)="cadastrarUsuario()">
+    <mat-form-field>
+      <mat-label for="username">Username:</mat-label>
+      <input id="username" matInput formControlName="username" />
+    </mat-form-field>
 
-<form [formGroup]="usuarioForm" (ngSubmit)="cadastrarUsuario()">
-  <div>
-    <label for="username">Username:</label>
-    <input id="username" type="text" formControlName="username" />
-  </div>
+    <mat-form-field>
+      <mat-label for="nome">Nome:</mat-label>
+      <input id="nome" matInput formControlName="nome" />
+    </mat-form-field>
 
-  <div>
-    <label for="nome">Nome:</label>
-    <input id="nome" type="text" formControlName="nome" />
-  </div>
+    <mat-form-field>
+      <mat-label for="cpf">CPF:</mat-label>
+      <input id="cpf" matInput formControlName="cpf" />
+    </mat-form-field>
 
-  <div>
-    <label for="cpf">CPF:</label>
-    <input id="cpf" type="text" formControlName="cpf" />
-  </div>
+    <mat-form-field>
+      <mat-label for="email">Email:</mat-label>
+      <input id="email" matInput formControlName="email" />
+    </mat-form-field>
 
-  <div>
-    <label for="email">Email:</label>
-    <input id="email" type="email" formControlName="email" />
-  </div>
+    <mat-form-field>
+      <mat-label for="password">Senha:</mat-label>
+      <input type="password" id="password" matInput formControlName="password" />
+    </mat-form-field>
 
-  <div>
-    <label for="password">Senha:</label>
-    <input id="password" type="password" formControlName="password" />
-  </div>
+    <div>
+      <label for="isAdmin">Administrador:</label>
+      <input id="isAdmin" type="checkbox" formControlName="isAdmin" />
+    </div>
 
-  <div>
-    <label for="isAdmin">Administrador:</label>
-    <input id="isAdmin" type="checkbox" formControlName="isAdmin" />
-  </div>
+    <button matButton="filled" type="submit" [disabled]="usuarioForm.invalid">Cadastrar</button>
+  </form>
 
-  <button type="submit" [disabled]="usuarioForm.invalid">Cadastrar</button>
-</form>
+  @if (mensagem) {
+    <p>{{ mensagem }}</p>
+  }
+</div>

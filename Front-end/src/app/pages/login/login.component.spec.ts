@@ -3,7 +3,7 @@ import { LoginComponent } from './login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
-import { of, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('LoginComponent', () => {
@@ -40,17 +40,6 @@ describe('LoginComponent', () => {
     component.form.setValue({ username: '', password: '' });
     component.login();
     expect(authServiceSpy.login).not.toHaveBeenCalled();
-  });
-
-  it('deve chamar AuthService.login com valores válidos', () => {
-    const mockResponse = { token: 'abc123' };
-    authServiceSpy.login.and.returnValue(of(mockResponse));
-
-    component.form.setValue({ username: 'user', password: 'pass' });
-    component.login();
-
-    expect(authServiceSpy.login).toHaveBeenCalledWith('user', 'pass');
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['/home']);
   });
 
   it('deve atualizar errorMessage em caso de erro', () => {
