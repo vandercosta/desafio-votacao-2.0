@@ -17,7 +17,10 @@
   <div class="home__cards">
     @for (pauta of pautas$ | async; track $index) {
       <div class="home__card">
-        <h3>{{ pauta.titulo }} ({{ pauta.categoria.nome }})</h3>
+        <h3>{{ pauta.titulo }}</h3>
+
+        <h4>{{ pauta.categoria.nome }}</h4>
+
         <p>{{ pauta.descricao }}</p>
 
         <div class="home__card__bottom">

@@ -1,11 +1,40 @@
 @if (pauta()) {
-  <div>
-    <h2>{{ pauta()?.titulo }}</h2>
-    <p>{{ pauta()?.descricao }}</p>
-  </div>
+  <div class="pauta__container">
+    <div class="pauta__detalhe">
+      <h2>
+        {{ pauta()?.titulo }}
+        @if (statusPauta) {
+          ({{ statusPauta }})
+        }
+      </h2>
+      <h4>{{ pauta()?.categoria?.nome }}</h4>
+      <p>{{ pauta()?.descricao }}</p>
 
-  <div>
-    <button (click)="votar('SIM')" [disabled]="!podeVotar">Vote SIM</button>
-    <button (click)="votar('NÃO')" [disabled]="!podeVotar">Vote NÃO</button>
+      <div class="pauta__detalhe__bottom"></div>
+    </div>
+
+    <div class="pauta__voto">
+      @if (!podeVotar) {
+        <div>
+          <p>Votaram SIM: {{ pauta()?.votosSim }}</p>
+          <p>Votaram NÃO: {{ pauta()?.votosNao }}</p>
+        </div>
+        <p>total de votos: {{ (pauta()?.votosSim ?? 0) + (pauta()?.votosNao ?? 0) }}</p>
+      }
+
+      @if (podeVotar) {
+        <div>
+          <button (click)="votar('SIM')" [disabled]="!podeVotar" matFab extended>
+            <mat-icon>thumb_up</mat-icon>
+            Vote SIM
+          </button>
+
+          <button (click)="votar('NÃO')" [disabled]="!podeVotar" matFab extended>
+            <mat-icon>thumb_down</mat-icon>
+            Vote NÃO
+          </button>
+        </div>
+      }
+    </div>
   </div>
 }
