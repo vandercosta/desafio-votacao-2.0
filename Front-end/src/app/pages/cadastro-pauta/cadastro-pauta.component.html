@@ -1,0 +1,46 @@
+<h2>cadastro</h2>
+
+<!-- Sucesso -->
+@if (pautaCriada()) {
+  <div style="color: green; margin-bottom: 10px">
+    Pauta cadastrada com sucesso!
+    <a [routerLink]="['/pautas', pautaCriada()?._id]"> Clique aqui para acessar a pauta criada </a>
+  </div>
+}
+
+<!-- Erro -->
+@if (erroCadastro()) {
+  <div style="color: red; margin-bottom: 10px">
+    {{ erroCadastro() }}
+  </div>
+}
+
+<form [formGroup]="pautaForm" (ngSubmit)="cadastrarPauta()">
+  <div>
+    <label for="titulo">Título:</label>
+    <input id="titulo" type="text" formControlName="titulo" />
+  </div>
+
+  <div>
+    <label for="descricao">Descrição:</label>
+    <input id="descricao" type="text" formControlName="descricao" />
+  </div>
+
+  <div>
+    <label for="dataExpiracao">Data e Hora de Expiração:</label>
+    <input id="dataExpiracao" type="datetime-local" formControlName="dataExpiracao" />
+  </div>
+
+  <div>
+    <label for="categoria">Categoria:</label>
+    <select id="categoria" formControlName="categoria">
+      <option value="" disabled selected>Selecione uma categoria</option>
+
+      @for (cat of categorias$ | async; track cat._id) {
+        <option [value]="cat._id">{{ cat.nome }}</option>
+      }
+    </select>
+  </div>
+
+  <button type="submit">Criar Pauta</button>
+</form>
