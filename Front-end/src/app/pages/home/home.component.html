@@ -1,31 +1,38 @@
-<h1>{{ mensagem }}</h1>
-
 @if (isAdmin()) {
   <button (click)="cadastrarPauta()">Criar Pauta</button>
   <button (click)="listarUsuarios()">Lista de usuário</button>
 }
 
-<label for="categoria">Filtrar por categoria:</label>
-<select id="categoria" [(ngModel)]="filtroSelecionado" (change)="filtrar()">
-  <option value="todos">Todos</option>
-  @for (cat of categorias$ | async; track $index) {
-    <option [value]="cat._id">{{ cat.nome }}</option>
-  }
-</select>
+<div class="home__container">
+  <div class="home__header">
+    <h1>{{ mensagem }}</h1>
+  </div>
+  <div class="home__filter">
+    <mat-form-field>
+      <mat-label>Filtrar por categoria:</mat-label>
+      <select matNativeControl [(ngModel)]="filtroSelecionado" (change)="filtrar()">
+        <option value="todos">Todos</option>
+        @for (cat of categorias$ | async; track $index) {
+          <option [value]="cat._id">{{ cat.nome }}</option>
+        }
+      </select>
+    </mat-form-field>
+  </div>
 
-<div style="display: flex; margin: 10px; flex-wrap: wrap">
-  @for (pauta of pautas$ | async; track $index) {
-    <div style="margin: 10px">
-      <h3>{{ pauta.titulo }}</h3>
-      <p>{{ pauta.descricao }}</p>
-      <p>Categoria {{ pauta.categoria.nome }}</p>
+  <div class="home__cards">
+    @for (pauta of pautas$ | async; track $index) {
+      <div class="home__card">
+        <h3>{{ pauta.titulo }} ({{ pauta.categoria.nome }})</h3>
+        <p>{{ pauta.descricao }}</p>
 
-      <p>
-        Expira em: {{ pauta.dataExpiracao | date: 'dd/MM/yyyy' }} às
-        {{ pauta.dataExpiracao | date: 'HH:mm' }}
-      </p>
-
-      <button (click)="abrirDetalhe(pauta)">acessar</button>
-    </div>
-  }
+        <div class="home__card__bottom">
+          <span
+            >Expira em: {{ pauta.dataExpiracao | date: 'dd/MM/yyyy' }} às
+            {{ pauta.dataExpiracao | date: 'HH:mm' }}</span
+          >
+          <button (click)="abrirDetalhe(pauta)" matButton="outlined">acessar</button>
+        </div>
+      </div>
+    }
+  </div>
 </div>

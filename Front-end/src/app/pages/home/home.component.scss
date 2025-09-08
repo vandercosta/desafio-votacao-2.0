@@ -1,0 +1,39 @@
+.home {
+  &__header {
+    color: var(--mat-sys-on-secondary-container);
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0;
+  }
+
+  &__filter {
+    margin: 24px 0;
+  }
+
+  &__cards {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  &__card {
+    color: var(--mat-sys-on-secondary-container);
+    flex-direction: column;
+    display: flex;
+    width: 324px;
+    background-color: #fff;
+
+    border: 1px solid var(--mat-sys-secondary-container);
+    border-radius: 6px;
+    padding: 24px;
+
+    &__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
