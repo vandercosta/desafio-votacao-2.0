@@ -1,0 +1,14 @@
+.app__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 58px;
+  padding: 8px 80px;
+  // background-color: var(--mat-sys-on-secondary-container);
+  background-color: var(--mat-sys-outline);
+
+  &__buttons {
+    display: flex;
+    gap: 16px;
+  }
+}

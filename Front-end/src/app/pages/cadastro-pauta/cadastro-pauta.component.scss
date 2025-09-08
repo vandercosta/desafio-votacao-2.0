@@ -1,0 +1,16 @@
+.cadastro-pauta__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+  button {
+    width: 150px;
+  }
+}

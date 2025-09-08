@@ -1,0 +1,48 @@
+<div class="cadastro-pauta__container">
+  <h2>Cadastro de pauta</h2>
+  <form [formGroup]="pautaForm" (ngSubmit)="cadastrarPauta()">
+    <mat-form-field>
+      <mat-label for="titulo">Título:</mat-label>
+      <input id="titulo" matInput formControlName="titulo" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label for="descricao">Descrição:</mat-label>
+      <input id="descricao" matInput formControlName="descricao" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label for="dataExpiracao">Categoria</mat-label>
+      <select matNativeControl id="categoria" formControlName="categoria">
+        <option value="" disabled selected>Selecione uma categoria</option>
+        @for (cat of categorias$ | async; track cat._id) {
+          <option [value]="cat._id">{{ cat.nome }}</option>
+        }
+      </select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label for="dataExpiracao">Data e Hora de Expiração:</mat-label>
+      <input id="dataExpiracao" type="datetime-local" matInput formControlName="dataExpiracao" />
+    </mat-form-field>
+
+    <button type="submit" matButton="filled">Criar Pauta</button>
+  </form>
+
+  <!-- Sucesso -->
+  @if (pautaCriada()) {
+    <div style="color: green; margin-bottom: 10px">
+      Pauta cadastrada com sucesso!
+      <a [routerLink]="['/pautas', pautaCriada()?._id]">
+        Clique aqui para acessar a pauta criada
+      </a>
+    </div>
+  }
+
+  <!-- Erro -->
+  @if (erroCadastro()) {
+    <div style="color: red; margin-bottom: 10px">
+      {{ erroCadastro() }}
+    </div>
+  }
+</div>
