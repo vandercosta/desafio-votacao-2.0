@@ -1,0 +1,11 @@
+@if (pauta()) {
+  <div>
+    <h2>{{ pauta()?.titulo }}</h2>
+    <p>{{ pauta()?.descricao }}</p>
+  </div>
+
+  <div>
+    <button (click)="votar('SIM')" [disabled]="pauta()?.jaVotou">Vote SIM</button>
+    <button (click)="votar('NÃO')" [disabled]="pauta()?.jaVotou">Vote NÃO</button>
+  </div>
+}
