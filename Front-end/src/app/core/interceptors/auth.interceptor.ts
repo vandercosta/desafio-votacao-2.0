@@ -35,6 +35,7 @@ export class AuthInterceptor implements HttpInterceptor {
         // Sem permissão
         if (error.status === 403) {
           console.error('Você não tem permissão para acessar este recurso.');
+          this.router.navigate(['/login']);
         }
 
         // Erros do servidor
