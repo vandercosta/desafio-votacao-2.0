@@ -1,1 +1,27 @@
 <h1>{{ mensagem }}</h1>
+<button (click)="cadastrarPauta()">Criar Pauta</button>
+
+<label for="categoria">Filtrar por categoria:</label>
+<select id="categoria" [(ngModel)]="filtroSelecionado" (change)="filtrar()">
+  <option value="todos">Todos</option>
+  @for (cat of categorias$ | async; track $index) {
+    <option [value]="cat._id">{{ cat.nome }}</option>
+  }
+</select>
+
+<div style="display: flex; margin: 10px; flex-wrap: wrap">
+  @for (pauta of pautas$ | async; track $index) {
+    <div style="margin: 10px">
+      <h3>{{ pauta.titulo }}</h3>
+      <p>{{ pauta.descricao }}</p>
+      <p>Categoria {{ pauta.categoria.nome }}</p>
+
+      <p>
+        Expira em: {{ pauta.dataExpiracao | date: 'dd/MM/yyyy' }} às
+        {{ pauta.dataExpiracao | date: 'HH:mm' }}
+      </p>
+
+      <button (click)="abrirDetalhe(pauta)">acessar</button>
+    </div>
+  }
+</div>
