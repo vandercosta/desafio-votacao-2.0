@@ -31,7 +31,7 @@ export class ListaUsuarioComponent implements OnInit {
     this.usuariosService.getUsuarios().subscribe({
       next: (res: IUsuario[]) => {
         this.listaUsuarios.set(res);
-        this.mensagem.set('Usuários listados com sucesso!');
+        this.mensagem.set('Usuários');
       },
       error: (err) => {
         this.mensagem.set(err.error?.error || 'Erro ao listar usuários');

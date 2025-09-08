@@ -17,18 +17,42 @@
     display: flex;
     gap: 32px;
     flex-wrap: wrap;
+    @media (max-width: 1632px) {
+      gap: 64px;
+    }
+    @media (max-width: 1370px) {
+      gap: 32px;
+    }
+
+    @media (max-width: 1024px) {
+      gap: 16px;
+    }
+
+    @media (max-width: 500px) {
+      gap: 10px;
+    }
   }
 
   &__card {
     color: var(--mat-sys-on-secondary-container);
     flex-direction: column;
     display: flex;
-    width: 324px;
     background-color: #fff;
-
     border: 1px solid var(--mat-sys-secondary-container);
     border-radius: 6px;
     padding: 24px;
+    width: 20%;
+
+    @media (max-width: 1632px) {
+      width: 27%;
+    }
+
+    @media (max-width: 1024px) {
+      width: 26%;
+    }
+    @media (max-width: 500px) {
+      width: 100%;
+    }
 
     &__bottom {
       display: flex;

@@ -9,6 +9,10 @@
       </h2>
       <h4>{{ pauta()?.categoria?.nome }}</h4>
       <p>{{ pauta()?.descricao }}</p>
+      <p>
+        Expira em: {{ pauta()?.dataExpiracao | date: 'dd/MM/yyyy' }} às
+        {{ pauta()?.dataExpiracao | date: 'HH:mm' }}
+      </p>
 
       <div class="pauta__detalhe__bottom"></div>
     </div>
