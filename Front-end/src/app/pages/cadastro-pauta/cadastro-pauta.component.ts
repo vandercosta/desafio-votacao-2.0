@@ -37,7 +37,7 @@ export class CadastroPautaComponent implements OnInit {
   pautaForm = this.fb.group({
     titulo: ['', [Validators.required, Validators.minLength(3)]],
     descricao: ['', [Validators.required, Validators.minLength(5)]],
-    dataExpiracao: ['', Validators.required],
+    dataExpiracao: [''],
     categoria: ['', Validators.required],
   });
 

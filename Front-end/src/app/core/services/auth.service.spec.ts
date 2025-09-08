@@ -29,11 +29,13 @@ describe('AuthService', () => {
   });
 
   it('deve fazer login e salvar o token no localStorage', (done) => {
-    apiServiceSpy.post.and.returnValue(of({ token: mockToken }));
+    apiServiceSpy.post.and.returnValue(of({ token: mockToken, isAdmin: true }));
 
     service.login('usuario', 'senha').subscribe((res) => {
       expect(res.token).toBe(mockToken);
+      expect(res.isAdmin).toBeTrue();
       expect(localStorage.getItem('token')).toBe(mockToken);
+      expect(localStorage.getItem('isAdmin')).toBe('true');
       done();
     });
 

@@ -9,7 +9,11 @@ const pautaSchema = new mongoose.Schema({
     required: true,
   },
   dataCriacao: { type: Date, default: Date.now },
-  dataExpiracao: { type: Date, required: true },
+  dataExpiracao: {
+    type: Date,
+    required: true,
+    default: () => new Date(Date.now() + 1 * 60 * 1000), // agora + 1 minuto
+  },
   votosSim: { type: Number, default: 0 },
   votosNao: { type: Number, default: 0 },
   votaramSim: { type: [String], default: [] }, // lista de CPFs

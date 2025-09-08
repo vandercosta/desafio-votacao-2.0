@@ -44,7 +44,12 @@ const requireAdmin = require('../middlewares/requireAdmin');
  */
 router.post('/', authMiddleware, requireAdmin, async (req, res) => {
   try {
-    const { titulo, descricao, categoria, dataExpiracao } = req.body;
+    let { titulo, descricao, categoria, dataExpiracao } = req.body;
+
+    // Se dataExpiracao não for enviada, define como agora + 1 minuto
+    if (!dataExpiracao) {
+      dataExpiracao = new Date(Date.now() + 1 * 60 * 1000);
+    }
 
     const pauta = new Pauta({
       titulo,
