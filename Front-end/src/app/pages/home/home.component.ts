@@ -44,7 +44,6 @@ export class HomeComponent implements OnInit {
   cols = signal(3);
 
   ngOnInit(): void {
-    console.log('Pautas em votação');
     this.isAdmin.set(this.authService.getAdmin() === 'true');
 
     this.breakpointObserver
@@ -58,14 +57,6 @@ export class HomeComponent implements OnInit {
 
   abrirDetalhe(pauta: IPauta): void {
     this.router.navigate(['/pautas', pauta._id]);
-  }
-
-  cadastrarPauta(): void {
-    this.router.navigate(['/cadastrar-pauta']);
-  }
-
-  listarUsuarios(): void {
-    this.router.navigate(['/lista-usuario']);
   }
 
   filtrar(): void {

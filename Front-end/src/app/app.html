@@ -1,5 +1,12 @@
 <header class="app__header">
-  <button>Home</button>
+  <button (click)="listarPautas()" matButton="elevated">Home</button>
+
+  <div class="app__header__buttons">
+    @if (isAdmin()) {
+      <button (click)="cadastrarPauta()" matButton="elevated">Criar Pauta</button>
+      <button (click)="listarUsuarios()" matButton="elevated">Lista de usuário</button>
+    }
+  </div>
 </header>
 
 <main>
