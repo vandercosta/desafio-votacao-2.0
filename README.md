@@ -11,12 +11,12 @@ Sistema de votação de pautas, com back-end em Node.js/Express e front-end em A
 
 ```
 desafio-votacao-2.0/
-├── backend/          # API Node.js + Express
+├── Back-end/          # API Node.js + Express
 │   ├── src/
 │   ├── package.json
 │   ├── docker-compose.yml
 │   └── ...
-└── frontend/         # Aplicação Angular
+└── Front-end/         # Aplicação Angular
     ├── src/
     ├── angular.json
     └── package.json
@@ -31,7 +31,7 @@ desafio-votacao-2.0/
 1. Entre na pasta do back-end:
 
 ```bash
-cd backend
+cd Back-end
 ```
 
 2. Execute o Docker Compose para criar a base de dados:
@@ -56,7 +56,7 @@ npm install
 1. Entre no diretório do front-end:
 
 ```bash
-cd frontend
+cd Front-end
 ```
 
 2. Instale as dependências do Angular:
