@@ -1,27 +1,30 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { PautasService } from '../../core/services/pautas.service';
-import { Observable } from 'rxjs';
+
 import { IPauta } from '../../models/pauta';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
 })
 export class HomeComponent implements OnInit {
   private pautasService = inject(PautasService);
   private router = inject(Router);
 
-  mensagem = 'Pautas em votação';
-  pautas$!: Observable<IPauta[]>;
+  categorias$ = this.pautasService.getCategorias();
+  pautas$ = this.pautasService.getPautas();
 
-  now = new Date();
+  mensagem = 'Pautas em votação';
+
+  filtroSelecionado = signal<string>('todos');
 
   ngOnInit(): void {
-    this.pautas$ = this.pautasService.getPautas();
+    console.log('Pautas em votação');
   }
 
   abrirDetalhe(pauta: IPauta): void {
@@ -30,5 +33,9 @@ export class HomeComponent implements OnInit {
 
   cadastrarPauta(): void {
     this.router.navigate(['/cadastrar-pauta']);
+  }
+
+  filtrar(): void {
+    this.pautas$ = this.pautasService.getPautas(this.filtroSelecionado());
   }
 }

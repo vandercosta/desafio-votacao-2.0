@@ -3,6 +3,7 @@ import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
 import { IPauta } from '../../models/pauta';
 import { ICategoria } from '../../models/categoria';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +11,12 @@ import { ICategoria } from '../../models/categoria';
 export class PautasService {
   private api = inject(ApiService);
 
-  getPautas(): Observable<IPauta[]> {
-    return this.api.get('/api/pautas');
+  getPautas(categoriaId?: string): Observable<IPauta[]> {
+    let params = new HttpParams();
+    if (categoriaId && categoriaId !== 'todos') {
+      params = params.set('categoria', categoriaId);
+    }
+    return this.api.get<IPauta[]>(`/api/pautas`, params);
   }
 
   getPautaById(id: string): Observable<IPauta> {
