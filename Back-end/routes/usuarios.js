@@ -17,7 +17,8 @@ const validateCpf = require('../utils/validateCpf');
  *         description: Lista de usuários
  */
 router.get('/', authMiddleware, requireAdmin, async (req, res) => {
-  const usuarios = await Usuario.find();
+  const usuarios = await Usuario.find().select('-password');
+
   res.json(usuarios);
 });
 
