@@ -6,12 +6,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { UsuariosService } from '../../core/services/usuarios.service';
 import { IUsuario } from '../../models/usuario';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-lista-usuario',
   templateUrl: './lista-usuario.component.html',
   styleUrls: ['./lista-usuario.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, MatButtonModule],
 })
 export class ListaUsuarioComponent implements OnInit {
   private usuariosService = inject(UsuariosService);
