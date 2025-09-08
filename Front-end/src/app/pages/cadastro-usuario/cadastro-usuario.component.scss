@@ -1,0 +1,19 @@
+.cadastro-usuario {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 300px;
+
+      button {
+        width: 120px;
+      }
+    }
+  }
+}
